@@ -1,0 +1,8 @@
+# 1: Component Login (Inicio de sesión) con validación para usuarios registrados en data/users.js.
+#   - Se excluirán los usuarios con role user
+
+# 2: Generar un menú tipo "top-navbar" en el cual se desplegarán las opciones de acuerdo a su rol asignado dentro del archivo de  data/role_grants.js
+
+# 3: Dentro del componente Cart se deberá incluir un porcentaje de impuesto siendo una regla similar al IVA por producto (total + 16%)
+
+# 4: Incluir un botón de "Comprar" el cual deberá enviarnos a una nueva página y darnos un resúmen breve de nuestra compra realizada
