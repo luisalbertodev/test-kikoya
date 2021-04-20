@@ -87,39 +87,35 @@ function verifyUserExist(currentUser) {
 function getUser(state, props) {
 	const data = {
 		currentUser: undefined,
-		type: 'warning',
+		type: 'error',
 		message: '',
 	};
 
-	state.users.forEach((currentUser) => {
-		const { username, password, role } = currentUser;
-
-		const isMathUsername = normalizeString(props.username) === normalizeString(username);
-		const isMathPassword = normalizeString(props.password) === normalizeString(password);
-		const isProfileWithAccess = role !== 'user';
-
-		if (isMathUsername && isMathPassword && isProfileWithAccess) {
-			data.currentUser = currentUser;
-			data.type = 'success';
-			data.message = `Welcomete again ${username}`;
-		} else if (isMathUsername && isMathPassword) {
-			data.currentUser = undefined;
-			data.type = 'error';
-			data.message = `This  profile not with access`;
-		} else if (isMathUsername) {
-			data.currentUser = undefined;
-			data.type = 'error';
-			data.message = `Password incorrect`;
-		} else {
-			data.currentUser = undefined;
-			data.type = 'error';
-			data.message = 'This user not exist in to system';
-		}
-
-		return data;
+	const singleUser = state.users.find((currentUser) => {
+		const isMathUsername = normalizeString(props.username) === normalizeString(currentUser.username);
+		return isMathUsername;
 	});
 
-	console.log(data);
+	const isMathPassword = normalizeString(props.password) === normalizeString(singleUser?.password);
+	const isProfileWithAccess = singleUser?.role !== 'user';
+
+	if (!singleUser) {
+		data.currentUser = undefined;
+		data.type = 'error';
+		data.message = 'This user not exist in to system';
+	} else if (isMathPassword && isProfileWithAccess) {
+		data.currentUser = singleUser;
+		data.type = 'success';
+		data.message = `Welcomete again ${singleUser.username}`;
+	} else if (isMathPassword) {
+		data.currentUser = undefined;
+		data.type = 'error';
+		data.message = `This  profile not with access`;
+	} else {
+		data.currentUser = undefined;
+		data.type = 'error';
+		data.message = `Password incorrect`;
+	}
 
 	return data;
 }

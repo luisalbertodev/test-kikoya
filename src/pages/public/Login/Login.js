@@ -11,7 +11,7 @@ const Login = ({ setLoading }) => {
 	return (
 		<div className="container">
 			<div className="row">
-				<div className="col-xs-12 flex justify-center self-center flex-column min-vh-100">
+				<div className="col flex justify-center self-center flex-column min-vh-100">
 					<h3>Login</h3>
 					<FormLogin />
 				</div>

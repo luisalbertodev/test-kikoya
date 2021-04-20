@@ -1,4 +1,5 @@
 import { getProduct } from 'ducks/products';
+import { getIva, formatNumberTwoDigit } from '../utils';
 
 // actions
 const CART_ADD = 'cart/ADD';
@@ -68,8 +69,23 @@ export function getCurrency(state, props) {
 }
 
 export function getTotal(state, props) {
-	return state.cart.items.reduce((acc, id) => {
+	const subtotal = getSubtotal(state);
+	const taxes = getTaxes(state);
+	const total = subtotal + taxes;
+	return formatNumberTwoDigit(total);
+}
+
+export function getSubtotal(state, props) {
+	const subtotal = state.cart.items.reduce((acc, id) => {
 		const item = getProduct(state, { id });
 		return acc + item.price;
 	}, 0);
+
+	return formatNumberTwoDigit(subtotal);
+}
+
+export function getTaxes(state, props) {
+	const subtotal = getSubtotal(state);
+	const taxes = getIva(subtotal);
+	return formatNumberTwoDigit(taxes);
 }

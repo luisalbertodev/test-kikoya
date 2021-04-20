@@ -13,8 +13,8 @@ import usersReducer, { initialStateUsers } from 'ducks/users';
 import App from 'containers/App';
 import productsData from 'data/products';
 import usersData from 'data/users';
-import 'bootstrap/dist/css/bootstrap.css';
 import 'assets/styles/index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const persistConfig = {
 	key: 'ecommerceTest',
