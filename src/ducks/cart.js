@@ -4,10 +4,12 @@ import { getIva, formatNumberTwoDigit } from '../utils';
 // actions
 const CART_ADD = 'cart/ADD';
 const CART_REMOVE = 'cart/REMOVE';
+const CART_CHECKOUT = 'cart/CHECKOUT';
 
 // reducer
 const initialState = {
 	items: [], // array of product ids
+	orders: [], // array of orders completed
 	currency: 'MEX',
 };
 
@@ -17,6 +19,8 @@ export default function cart(state = initialState, action = {}) {
 			return handleCartAdd(state, action.payload);
 		case CART_REMOVE:
 			return handleCartRemove(state, action.payload);
+		case CART_CHECKOUT:
+			return handleCompleteCheckout(state, action.payload);
 		default:
 			return state;
 	}
@@ -36,6 +40,14 @@ function handleCartRemove(state, payload) {
 	};
 }
 
+function handleCompleteCheckout(state, payload) {
+	return {
+		...state,
+		items: [],
+		orders: [...state.orders, payload],
+	};
+}
+
 // action creators
 export function addToCart(productId) {
 	return {
@@ -52,6 +64,13 @@ export function removeFromCart(productId) {
 		payload: {
 			productId,
 		},
+	};
+}
+
+export function completeCheckout(payload) {
+	return {
+		type: CART_CHECKOUT,
+		payload,
 	};
 }
 

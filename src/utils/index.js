@@ -33,14 +33,14 @@ export const loadScript = (url) =>
 		}
 	});
 
-export const formatterPrice = (e) => {
-	if (!e || Number.isNaN(e)) return e;
-
-	return new Intl.NumberFormat('en-MX', {
-		style: 'currency',
-		currency: 'USD',
-		minimumFractionDigits: 2,
-	}).format(e);
+export const uuidv4 = () => {
+	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+		// eslint-disable-next-line no-bitwise
+		const r = (Math.random() * 16) | 0;
+		// eslint-disable-next-line no-bitwise
+		const v = c === 'x' ? r : (r & 0x3) | 0x8;
+		return v.toString(16);
+	});
 };
 
 export const getIva = (mount) => {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from 'pages/public/Login';
 import Main from 'pages/private/Main';
+import ThankForYourPurchase from 'containers/ThankForYourPurchase';
 import Page404 from 'components/Page404';
 import { loadScript } from 'utils';
 import { BOOTSTRAP_BUNDLE } from 'data/cdns';
@@ -26,6 +27,7 @@ const App = ({ isLoged }) => {
 			<Switch>
 				<PublicRoute exact path="/login" authed={isLoged} component={Login} />
 				<PrivateRoute exact path="/" authed={isLoged} component={Main} />
+				<Route path="/thank-for-your-purchase/:id" component={ThankForYourPurchase} />
 				<Route path="*" component={Page404} />
 			</Switch>
 		</Router>
